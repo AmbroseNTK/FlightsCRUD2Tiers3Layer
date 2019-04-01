@@ -1,0 +1,120 @@
+﻿<Page
+    x:Class="FlightsCRUD2Tiers3Layer.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FlightsCRUD2Tiers3Layer"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <MenuBar VerticalAlignment="Top">
+            <MenuBarItem Title="Data Operation">
+                <MenuFlyoutItem Text="Load" Click="LoadData_Click">
+                </MenuFlyoutItem>
+                <MenuFlyoutItem Text="Insert" Click="InsertData_Click">
+                </MenuFlyoutItem>
+                <MenuFlyoutItem Text="Update" Click="UpdateData_Click">
+                </MenuFlyoutItem>
+                <MenuFlyoutItem Text="Delete" Click="DeleteData_Click">
+                </MenuFlyoutItem>
+            </MenuBarItem>
+           
+        </MenuBar>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="16*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0 10 0 0" Orientation="Vertical" Background="{ThemeResource StrongAcrylicBrush}">
+                <TextBlock Margin="10 0 0 0">ID</TextBlock>
+                <TextBox x:Name="tbID" Margin="10" IsReadOnly="True"></TextBox>
+                <TextBlock Margin="10 0 0 0">Code</TextBlock>
+                <TextBox x:Name="tbCode" Margin="10"></TextBox>
+                <TextBlock Margin="10 0 0 0">Arrival Airport</TextBlock>
+                <TextBox x:Name="tbArrAir" Margin="10"></TextBox>
+                <TextBlock Margin="10 0 0 0">Arrival Gate</TextBlock>
+                <TextBox x:Name="tbArrGate" Margin="10"></TextBox>
+                <TextBlock Margin="10 0 0 0">Depature Airport</TextBlock>
+                <TextBox x:Name="tbDeptAir" Margin="10"></TextBox>
+                <TextBlock Margin="10 0 0 0">Depature Gate</TextBlock>
+                <TextBox x:Name="tbDeptGate" Margin="10"></TextBox>
+                <TextBlock Margin="10 0 0 0">Date</TextBlock>
+                <DatePicker x:Name="pickerDate" Margin="10" HorizontalAlignment="Stretch"></DatePicker>
+                <TextBlock Margin="10 0 0 0">Check-in Time</TextBlock>
+                <TimePicker x:Name="pickerTime" Margin="10" HorizontalAlignment="Stretch"></TimePicker>
+                
+            </StackPanel>
+            <controls:DataGrid
+        Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}"
+        Grid.Column="1"
+        Grid.RowSpan="2"
+        x:Name="dataGrid"
+        Margin="12"
+        VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+        HorizontalScrollBarVisibility="Visible"
+        VerticalScrollBarVisibility="Visible"
+        AlternatingRowBackground="Transparent"
+        AlternatingRowForeground="Gray"
+        AreRowDetailsFrozen="False"
+        AreRowGroupHeadersFrozen="True"
+        AutoGenerateColumns="False"
+        CanUserSortColumns="False"
+        CanUserReorderColumns="True"
+        CanUserResizeColumns="True"
+        ColumnHeaderHeight="32"
+        MaxColumnWidth="400"
+        FrozenColumnCount="0"
+        GridLinesVisibility="Vertical"
+        HeadersVisibility="Column"
+        IsReadOnly="True"
+        RowDetailsVisibilityMode="Collapsed"
+        SelectionMode="Single"
+        RowGroupHeaderPropertyNameAlternative="Range" SelectionChanged="DataGrid_SelectionChanged">
+                <controls:DataGrid.Columns>
+                    <controls:DataGridTextColumn Header="ID" Binding="{Binding ID}" Tag="ID" IsReadOnly="True" />
+                    <controls:DataGridTextColumn Header="Code" Binding="{Binding Code}" Tag="Code"/>
+                    <controls:DataGridTextColumn Header="Arrival Airport" Binding="{Binding ArrivalAirport}" Tag="ArrivalAirport"/>
+                    <controls:DataGridTextColumn Header="Arrival Gate" Binding="{Binding ArrivalGate}" Tag="ArrivalGate"/>
+                    <controls:DataGridTextColumn Header="Depature Airport" Binding="{Binding DepatureAirport}" Tag="DepatureAirport"/>
+                    <controls:DataGridTextColumn Header="Depature Gate" Binding="{Binding DepatureGate}" Tag="DepatureGate"/>
+                    <controls:DataGridTextColumn Header="Date" Binding="{Binding Date}" Tag="Date"/>
+                    <controls:DataGridTextColumn Header="Check-in Time" Binding="{Binding CheckInTime}" Tag="CheckInTime"/>
+                </controls:DataGrid.Columns>
+            </controls:DataGrid>
+            <StackPanel Grid.Row="1" Grid.Column="0">
+                <TextBlock Margin="10 0 0 0">Search Expression</TextBlock>
+                <TextBox x:Name="tbKeywords" Margin="10"></TextBox>
+                <TextBlock Margin="10 10 10 10">Expression Builder</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="50" Height="50" Margin="10 0 0 0" Style="{ThemeResource ButtonRevealStyle}" Tag="ID=" Click="AddKeywordToExpression">ID</Button>
+                    <Button Width="50" Height="50" Style="{ThemeResource ButtonRevealStyle}" Tag="CODE=" Click="AddKeywordToExpression">Code</Button>
+                    <Button Width="50" Height="50" Style="{ThemeResource ButtonRevealStyle}" Tag="DATE=" Click="AddKeywordToExpression">Date</Button>
+                    <Button Width="50" Height="50" Style="{ThemeResource ButtonRevealStyle}" Tag="TIME=" Click="AddKeywordToExpression">Time</Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="100" Height="50" Margin="10 0 0 0" Style="{ThemeResource ButtonRevealStyle}" Tag="AA=" Click="AddKeywordToExpression">Arr. Airport</Button>
+                    <Button Width="100" Height="50" Style="{ThemeResource ButtonRevealStyle}" Tag="AG=" Click="AddKeywordToExpression">Arr. Gate</Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Width="100" Height="50" Margin="10 0 0 0" Style="{ThemeResource ButtonRevealStyle}" Tag="DA=" Click="AddKeywordToExpression">Dep. Airport</Button>
+                    <Button Width="100" Height="50" Style="{ThemeResource ButtonRevealStyle}" Tag="DG=" Click="AddKeywordToExpression">Dep. Gate</Button>
+                </StackPanel>
+                <Button HorizontalAlignment="Stretch" Margin="10 10 10 10" Style="{ThemeResource ButtonRevealStyle}" Click="Search_Click">Search</Button>
+            </StackPanel>
+        </Grid>
+        
+    </Grid>
+    
+</Page>
+
+
